@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Demo stranica za usluge čišćenja u Osijeku i okolici.">
+  <title>Lege čistoće OS</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@500;600&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#14181A;
+    --surface:#1C2224;
+    --surface-2:#20272A;
+    --text:#F4F4EF;
+    --text-muted:#9BA6A3;
+    --accent:#FF6A00;
+    --accent-ink:#14181A;
+    --line:#F4F4EF;
+    color-scheme: dark;
+  }
+  /* Brutal-industrial is a deliberate single-theme design: dark ground, hard edges, one signal color in both OS modes. */
+  :root[data-theme="light"]{
+    --bg:#14181A; --surface:#1C2224; --surface-2:#20272A;
+    --text:#F4F4EF; --text-muted:#9BA6A3; --accent:#FF6A00;
+    --accent-ink:#14181A; --line:#F4F4EF;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Work Sans", ui-sans-serif, system-ui, Arial, sans-serif;
+    padding-inline:18px;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  .wrap{max-width:940px; margin:0 auto;}
+  h1,h2,h3{
+    font-family:"Archivo Black", ui-sans-serif, system-ui, Arial, sans-serif;
+    text-transform:uppercase;
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+    margin:0;
+    font-weight:400;
+  }
+  a{color:inherit;}
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace;}
+  .eyebrow{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.76rem;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .eyebrow::before{content:"// ";}
+
+  header{
+    padding-block:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    border-bottom:3px solid var(--line);
+    position:sticky;
+    top:env(safe-area-inset-top, 0px);
+    background:var(--bg);
+    z-index:10;
+    flex-wrap:wrap;
+    overflow:visible;
+  }
+  header .btn-fill{ box-shadow:none; }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:"Archivo Black", sans-serif;
+    font-size:1.05rem;
+    text-transform:uppercase;
+  }
+  .brand .mark{
+    width:38px; height:38px;
+    background:var(--accent);
+    color:var(--accent-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Archivo Black", sans-serif;
+    font-size:1rem;
+    flex:none;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    border:3px solid var(--line);
+    padding:13px 20px;
+    font-family:"IBM Plex Mono", monospace;
+    font-weight:600;
+    text-transform:uppercase;
+    font-size:0.84rem;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    white-space:nowrap;
+    background:var(--bg);
+    color:var(--text);
+  }
+  .btn-fill{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); box-shadow:6px 6px 0 var(--line); }
+  .btn-fill:active{ box-shadow:2px 2px 0 var(--line); transform:translate(4px,4px); }
+  .btn-outline{ box-shadow:6px 6px 0 var(--accent); }
+  .btn-outline:active{ box-shadow:2px 2px 0 var(--accent); transform:translate(4px,4px); }
+
+  /* hero — centered, poster-scale, with a ghost watermark */
+  .hero{
+    padding-block:80px 56px;
+    display:grid;
+    justify-items:center;
+    text-align:center;
+    gap:20px;
+    position:relative;
+    isolation:isolate;
+  }
+  .hero-watermark{
+    position:absolute;
+    top:8px; left:50%;
+    transform:translateX(-50%);
+    font-family:"Archivo Black", sans-serif;
+    font-size:clamp(4.5rem, 22vw, 13rem);
+    color:var(--text);
+    opacity:0.035;
+    white-space:nowrap;
+    z-index:0;
+    letter-spacing:-0.02em;
+    pointer-events:none;
+    line-height:1;
+  }
+  .hero > *:not(.hero-watermark){ position:relative; z-index:1; }
+  .hero h1{ font-size:clamp(2.4rem, 7vw, 4.2rem); max-width:16ch; }
+  .hero .accent{ color:var(--accent); }
+  .hero p.lead{ font-size:1.15rem; color:var(--text-muted); max-width:46ch; }
+  .badge-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    border:2px solid var(--line);
+    padding:7px 14px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.8rem;
+    color:var(--text-muted);
+  }
+  .badge strong{ color:var(--text); }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
+
+  section{ padding-block:64px; }
+  section + section{ border-top:3px solid var(--line); }
+  .section-head{
+    margin-bottom:34px;
+    display:grid;
+    gap:10px;
+    justify-items:center;
+    text-align:center;
+  }
+  .section-head h2{ font-size:clamp(2.1rem, 5.5vw, 3rem); max-width:18ch; }
+  .section-head .sub{ color:var(--text-muted); max-width:46ch; font-size:1rem; }
+
+  .svc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:0;
+    border-top:3px solid var(--line);
+    border-left:3px solid var(--line);
+  }
+  .svc-card{
+    background:var(--surface);
+    border-right:3px solid var(--line);
+    border-bottom:3px solid var(--line);
+    padding:26px 22px;
+    display:grid;
+    gap:10px;
+    align-content:start;
+  }
+  .svc-card .idx{ font-family:"IBM Plex Mono", monospace; color:var(--accent); font-size:0.8rem; font-weight:600; }
+  .svc-card h3{ font-size:1.08rem; text-transform:none; letter-spacing:0; font-family:"Work Sans", sans-serif; font-weight:700; }
+  .svc-card p{ margin:0; color:var(--text-muted); font-size:0.92rem; }
+
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:0;
+    border-top:3px solid var(--line);
+    border-left:3px solid var(--line);
+  }
+  .step{
+    padding:28px 24px;
+    border-right:3px solid var(--line);
+    border-bottom:3px solid var(--line);
+    display:grid; gap:10px;
+    text-align:center;
+    justify-items:center;
+  }
+  .step .step-num{ font-family:"Archivo Black", sans-serif; font-size:3rem; color:var(--accent); line-height:1; }
+  .step h3{ font-size:1.08rem; text-transform:none; letter-spacing:0; font-family:"Work Sans",sans-serif; font-weight:700; }
+  .step p{ margin:0; color:var(--text-muted); font-size:0.92rem; max-width:26ch; }
+
+  .ba-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:18px;
+  }
+  .ba-box{
+    border:3px dashed var(--line);
+    min-height:260px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    padding:24px;
+  }
+  .ba-box .ba-label{ font-family:"IBM Plex Mono", monospace; text-transform:uppercase; font-size:0.84rem; letter-spacing:0.04em; color:var(--text-muted); max-width:24ch; }
+  .ba-box .ba-tag{
+    display:inline-block; font-family:"IBM Plex Mono", monospace; font-size:0.72rem; color:var(--accent);
+    border:2px solid var(--accent); padding:3px 10px; margin-bottom:14px; text-transform:uppercase;
+  }
+  .ba-box.has-image{
+    min-height:300px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .ba-box.has-image::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(20,24,26,0.12), rgba(20,24,26,0.88));
+  }
+  .ba-box.has-image > div{ position:relative; z-index:1; }
+  .faq-list{ display:grid; gap:12px; }
+  .faq-list details{
+    border:3px solid var(--line);
+    background:var(--surface);
+    padding:18px 20px;
+  }
+  .faq-list summary{ cursor:pointer; font-weight:700; }
+  .faq-list details p{ color:var(--text-muted); margin:12px 0 0; }
+  .quote-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:18px;
+  }
+  .quote-card{
+    border:3px solid var(--line);
+    padding:22px;
+    background:var(--surface);
+  }
+  .quote-card p{ margin:0 0 14px; color:var(--text-muted); }
+  .quote-card strong{ color:var(--accent); }
+  .demo-note{
+    border:2px dashed var(--accent);
+    color:var(--text-muted);
+    padding:12px 16px;
+    font-size:0.85rem;
+    max-width:58ch;
+  }
+  .contact-form{
+    width:100%;
+    max-width:640px;
+    display:grid;
+    gap:12px;
+    text-align:left;
+  }
+  .contact-form label{
+    display:grid;
+    gap:6px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select{
+    width:100%;
+    border:2px solid var(--line);
+    background:var(--bg);
+    color:var(--text);
+    padding:12px;
+    font:inherit;
+  }
+  .contact-form textarea{ min-height:100px; resize:vertical; }
+  .form-status{ color:var(--accent); font-family:"IBM Plex Mono", monospace; font-size:0.8rem; min-height:1.2em; }
+
+  .trust-strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:0;
+    border-top:3px solid var(--line);
+    border-left:3px solid var(--line);
+  }
+  .trust-item{
+    padding:24px;
+    border-right:3px solid var(--line);
+    border-bottom:3px solid var(--line);
+    display:grid; gap:6px;
+    text-align:center;
+  }
+  .trust-item .big{ font-family:"Archivo Black", sans-serif; font-size:1.9rem; color:var(--accent); }
+  .trust-item span{ color:var(--text-muted); font-size:0.86rem; font-family:"IBM Plex Mono", monospace; text-transform:uppercase; letter-spacing:0.03em; }
+
+  .area-chips{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .chip{
+    border:2px solid var(--line); padding:9px 16px;
+    font-family:"IBM Plex Mono", monospace; font-size:0.85rem; text-transform:uppercase;
+  }
+
+  .contact-block{
+    border:3px solid var(--line);
+    background:var(--surface);
+    padding:44px 36px;
+    display:grid;
+    gap:26px;
+    justify-items:center;
+    text-align:center;
+    box-shadow:10px 10px 0 var(--accent);
+  }
+  .contact-block h2{ font-size:clamp(2rem, 5.5vw, 3rem); max-width:16ch; }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:22px;
+    width:100%;
+    max-width:640px;
+  }
+  .contact-line{ display:grid; gap:4px; justify-items:center; }
+  .contact-line .label{ font-family:"IBM Plex Mono", monospace; font-size:0.74rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:600; }
+  .contact-line .value{ font-size:1.1rem; display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; }
+  .copy-btn{
+    border:2px solid var(--line); background:var(--bg); color:var(--text-muted);
+    font-size:0.72rem; padding:3px 8px; cursor:pointer; font-family:"IBM Plex Mono", monospace; text-transform:uppercase;
+  }
+  .copy-btn:active{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+
+  footer{
+    padding-block:30px 120px;
+    color:var(--text-muted);
+    font-size:0.82rem;
+    display:flex; justify-content:center; text-align:center;
+    gap:10px; flex-wrap:wrap;
+    font-family:"IBM Plex Mono", monospace;
+  }
+  footer .note{ max-width:50ch; }
+
+  /* floating social rail — round, soft, glass-dark */
+  .social-rail{
+    position:fixed;
+    right:20px;
+    bottom:calc(20px + env(safe-area-inset-bottom, 0px));
+    display:grid;
+    gap:12px;
+    z-index:20;
+  }
+  .social-btn{
+    width:50px; height:50px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(20,24,26,0.72);
+    backdrop-filter:blur(6px);
+    border:1px solid rgba(244,244,239,0.25);
+    color:var(--text);
+    text-decoration:none;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35);
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .social-btn:active{ transform:scale(0.92); }
+  .social-btn.wa{ background:#25D366; border-color:#25D366; color:#0B3B22; }
+  .social-btn svg{ width:22px; height:22px; }
+
+  @media (max-width:480px){
+    header{ padding-block:12px; }
+    .hero{ padding-block:56px 40px; }
+    section{ padding-block:48px; }
+    .contact-block{ padding:28px 20px; }
+    .social-btn{ width:46px; height:46px; }
+    .social-rail{ right:14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="mark">LČ</span>
+      Lege čistoće OS
+    </div>
+    <a class="btn btn-fill" href="tel:0916180799">Nazovi: 091 618 0799</a>
+  </header>
+
+  <section class="hero">
+    <span class="hero-watermark" aria-hidden="true">OSIJEK</span>
+    <div class="eyebrow">Osijek i okolica</div>
+    <h1>Čist prostor, <span class="accent">bez komplikacija</span></h1>
+    <p class="lead">Pouzdano čišćenje i održavanje prostora na području Osijeka i okolice. Dolazimo na vrijeme, radimo temeljito i ostavljamo prostor spreman za korištenje.</p>
+    <div class="badge-row">
+      <span class="badge">★★★★★ <strong>5.0</strong> · 10 recenzija <small>(demo)</small></span>
+      <span class="badge">Osijek i okolica</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-fill" href="tel:0916180799">Nazovi odmah</a>
+      <a class="btn btn-outline" href="https://wa.me/385916180799?text=Pozdrav%2C%20zanima%20me%20%C4%8Di%C5%A1%C4%87enje." target="_blank" rel="noopener">Pošalji upit na WhatsApp</a>
+    </div>
+  </section>
+
+  <section id="usluge">
+    <div class="section-head">
+      <div class="eyebrow">Usluge</div>
+      <h2>Što radimo</h2>
+      <p class="sub">Za dom, posao i posebne situacije kada prostor treba brzo i temeljito dovesti u red.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <span class="idx">01</span>
+        <h3>Stanovi i kuće</h3>
+        <p>Redovno ili jednokratno čišćenje doma, prema dogovorenom opsegu i terminu.</p>
+      </div>
+      <div class="svc-card">
+        <span class="idx">02</span>
+        <h3>Uredi i poslovni prostori</h3>
+        <p>Uredan i ugodan radni prostor uz pouzdano čišćenje po rasporedu.</p>
+      </div>
+      <div class="svc-card">
+        <span class="idx">03</span>
+        <h3>Apartmani i turistički objekti</h3>
+        <p>Brza izmjena i priprema prostora između gostiju, uz fokus na detalje.</p>
+      </div>
+      <div class="svc-card">
+        <span class="idx">04</span>
+        <h3>Generalno čišćenje</h3>
+        <p>Temeljito čišćenje nakon radova, selidbe, useljenja ili dužeg nekorištenja.</p>
+      </div>
+      <div class="svc-card">
+        <span class="idx">05</span>
+        <h3>Podrumi, garaže i posebni zahtjevi</h3>
+        <p>Dogovaramo opseg posla prema stvarnom stanju prostora i vašim potrebama.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kako">
+    <div class="section-head">
+      <div class="eyebrow">Postupak</div>
+      <h2>Kako radimo</h2>
+      <p class="sub">Tri jasna koraka od prvog upita do čistog prostora.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num mono">1</span>
+        <h3>Pošaljete upit ili nazovete</h3>
+        <p>Opišete prostor i što vam treba — mi postavimo prava pitanja.</p>
+      </div>
+      <div class="step">
+        <span class="step-num mono">2</span>
+        <h3>Dogovorimo opseg i termin</h3>
+        <p>Dobijete jasnu procjenu prije dolaska i termin koji vam odgovara.</p>
+      </div>
+      <div class="step">
+        <span class="step-num mono">3</span>
+        <h3>Dolazimo i čistimo</h3>
+        <p>Radimo pažljivo i ostavljamo prostor urednim i spremnim za korištenje.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="prije-poslije">
+    <div class="section-head">
+      <div class="eyebrow">Rezultat</div>
+      <h2>Prije / poslije</h2>
+      <p class="sub">Primjeri su ilustrativne stock fotografije dok ne zamijenimo slike stvarnim projektima.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-box has-image" style="background-image:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80')">
+        <div>
+          <span class="ba-tag">Prije</span>
+          <div class="ba-label">Prostor koji treba temeljito čišćenje</div>
+        </div>
+      </div>
+      <div class="ba-box has-image" style="background-image:url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80')">
+        <div>
+          <span class="ba-tag">Poslije</span>
+          <div class="ba-label">Uredan prostor spreman za korištenje</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="recenzije">
+    <div class="section-head">
+      <div class="eyebrow">Povjerenje</div>
+      <h2>Što klijenti kažu</h2>
+      <p class="sub">Recenzije u nastavku su demo sadržaj i trebaju se zamijeniti stvarnim izjavama klijenata.</p>
+    </div>
+    <div class="quote-grid">
+      <article class="quote-card">
+        <p>“Brz dogovor, točan dolazak i prostor je nakon čišćenja izgledao odlično.”</p>
+        <strong>— Demo recenzija</strong>
+      </article>
+      <article class="quote-card">
+        <p>“Sve je bilo jasno od prvog poziva. Preporuka za poslovne prostore.”</p>
+        <strong>— Demo recenzija</strong>
+      </article>
+      <article class="quote-card">
+        <p>“Posebno nam je značilo što su se prilagodili našem terminu.”</p>
+        <strong>— Demo recenzija</strong>
+      </article>
+    </div>
+  </section>
+
+  <section id="zasto">
+    <div class="section-head">
+      <div class="eyebrow">Zašto mi</div>
+      <h2>Na što se oslanjate</h2>
+    </div>
+    <div class="trust-strip">
+      <div class="trust-item"><span class="big">5.0 / 5</span><span>10 recenzija</span></div>
+      <div class="trust-item"><span class="big">Pažljivo</span><span>prema prostoru</span></div>
+      <div class="trust-item"><span class="big">Fiksno</span><span>cijena unaprijed</span></div>
+      <div class="trust-item"><span class="big">Brzo</span><span>dogovor u danu</span></div>
+    </div>
+  </section>
+
+  <section id="podrucje">
+    <div class="section-head">
+      <div class="eyebrow">Područje rada</div>
+      <h2>Osijek i okolica</h2>
+    </div>
+    <div class="area-chips">
+      <span class="chip">Osijek</span>
+      <span class="chip">Tenja</span>
+      <span class="chip">Josipovac</span>
+      <span class="chip">Sarvaš</span>
+      <span class="chip">Čepin</span>
+      <span class="chip">Vuka</span>
+      <span class="chip">Briješće</span>
+      <span class="chip">Nemetin</span>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-head">
+      <div class="eyebrow">Pitanja</div>
+      <h2>Česta pitanja</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>Kako mogu dobiti procjenu?</summary>
+        <p>Nazovite, pošaljite WhatsApp poruku ili ispunite demo obrazac. Za precizniju procjenu možete dodati fotografije prostora.</p>
+      </details>
+      <details>
+        <summary>Radite li čišćenje po satu ili po dogovoru?</summary>
+        <p>Opseg i cijena dogovaraju se prema prostoru, vrsti posla i učestalosti čišćenja.</p>
+      </details>
+      <details>
+        <summary>Na kojem području radite?</summary>
+        <p>Osijek i okolica. Za udaljenije lokacije dostupnost se provjerava pri dogovoru.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="contact-block">
+      <h2>Imate prostor koji treba očistiti?</h2>
+      <p class="demo-note">Napomena: podaci za kontakt, recenzije i obrazac na ovoj demo stranici privremeni su primjeri pronađeni u postojećem projektu.</p>
+      <div class="contact-grid">
+        <div class="contact-line">
+          <span class="label">Telefon</span>
+          <span class="value">091 618 0799 <button class="copy-btn" data-copy="091 618 0799">kopiraj</button></span>
+        </div>
+        <div class="contact-line">
+          <span class="label">E-mail</span>
+          <span class="value">975drazen@gmail.com <button class="copy-btn" data-copy="975drazen@gmail.com">kopiraj</button></span>
+        </div>
+        <div class="contact-line">
+          <span class="label">Područje</span>
+          <span class="value">Osijek i okolica</span>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-fill" href="https://wa.me/385916180799?text=Pozdrav%2C%20zanima%20me%20%C4%8Di%C5%A1%C4%87enje." target="_blank" rel="noopener">Pošalji upit na WhatsApp</a>
+        <a class="btn btn-outline" href="tel:0916180799">Nazovi odmah</a>
+      </div>
+      <form class="contact-form" id="demo-form">
+        <label>Ime i prezime<input name="name" type="text" autocomplete="name" required></label>
+        <label>Telefon ili e-mail<input name="contact" type="text" required></label>
+        <label>Vrsta usluge<select name="service" required>
+          <option value="">Odaberite uslugu</option>
+          <option>Stan ili kuća</option>
+          <option>Ured ili poslovni prostor</option>
+          <option>Apartman</option>
+          <option>Generalno čišćenje</option>
+          <option>Drugo</option>
+        </select></label>
+        <label>Poruka<textarea name="message" placeholder="Kratko opišite prostor i što vam treba."></textarea></label>
+        <button class="btn btn-fill" type="submit">Pošalji demo upit</button>
+        <div class="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span>© Lege čistoće OS · Osijek — Demo stranica. Kontaktni podaci, fotografije i recenzije nisu konačni.</span>
+  </footer>
+</div>
+
+<div class="social-rail">
+  <a class="social-btn wa" href="https://wa.me/385916180799" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5a8 8 0 1 1-3.4-6.5"/><path d="M20 11.5 21 4l-6.8 2"/><path d="M8.5 9.5c.3 2.6 2.4 4.7 5 5" stroke-linecap="round"/></svg>
+  </a>
+  <a class="social-btn" href="#" aria-label="Instagram" title="Instagram (dodaj link)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
+  </a>
+  <a class="social-btn" href="#" aria-label="Facebook" title="Facebook (dodaj link)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 21v-7h2.4l.4-3H14V9c0-.9.3-1.5 1.7-1.5H17V4.8C16.6 4.7 15.6 4.6 14.6 4.6c-2.2 0-3.6 1.3-3.6 3.8V11H8.5v3H11v7" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', async function(){
+      var text = btn.getAttribute('data-copy');
+      var original = btn.textContent;
+      try{
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'kopirano';
+      }catch(e){
+        try{
+          var range = document.createRange();
+          var span = document.createElement('span');
+          span.textContent = text;
+          span.style.position='fixed';
+          span.style.opacity='0';
+          document.body.appendChild(span);
+          range.selectNode(span);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          document.execCommand('copy');
+          document.body.removeChild(span);
+          btn.textContent = 'kopirano';
+        }catch(e2){
+          btn.textContent = 'odaberite ručno';
+        }
+      }
+      setTimeout(function(){ btn.textContent = original; }, 1600);
+    });
+  });
+  document.getElementById('demo-form').addEventListener('submit', function(event){
+    event.preventDefault();
+    event.currentTarget.querySelector('.form-status').textContent = 'Demo poruka je zaprimljena lokalno. Slanje još nije povezano s e-mailom.';
+    event.currentTarget.reset();
+  });
+</script>
+</body>
+</html>
