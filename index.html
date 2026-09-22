@@ -369,13 +369,61 @@
   .social-btn.wa{ background:#25D366; border-color:#25D366; color:#0B3B22; }
   .social-btn svg{ width:22px; height:22px; }
 
-  @media (max-width:480px){
-    header{ padding-block:12px; }
-    .hero{ padding-block:56px 40px; }
-    section{ padding-block:48px; }
-    .contact-block{ padding:28px 20px; }
+  @media (max-width:700px){
+    body{ padding-inline:10px; overflow-x:hidden; font-size:0.92rem; }
+    .wrap{ width:100%; max-width:100%; }
+    header{
+      padding-block:10px;
+      gap:8px;
+      align-items:stretch;
+    }
+    .brand{ font-size:0.82rem; gap:7px; }
+    .brand .mark{ width:30px; height:30px; font-size:0.8rem; }
+    header .btn{ width:100%; justify-content:center; padding:10px 12px; font-size:0.68rem; }
+    .hero{ padding-block:42px 32px; gap:14px; }
+    .hero h1{ font-size:clamp(2rem, 10vw, 2.7rem); }
+    .hero p.lead{ font-size:0.95rem; }
+    .hero-watermark{ font-size:clamp(3.5rem, 22vw, 6rem); }
+    .badge-row, .cta-row{ width:100%; gap:8px; }
+    .badge{ font-size:0.68rem; padding:6px 8px; max-width:100%; }
+    .cta-row{ flex-direction:column; align-items:stretch; }
+    .cta-row .btn{ width:100%; justify-content:center; white-space:normal; text-align:center; }
+    section{ padding-block:36px; }
+    .section-head{ margin-bottom:20px; }
+    .section-head h2{ font-size:clamp(1.75rem, 8vw, 2.3rem); }
+    .section-head .sub{ font-size:0.88rem; }
+    .svc-grid, .steps{ grid-template-columns:1fr; }
+    .svc-card, .step{ padding:18px 16px; }
+    .ba-grid{
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:8px;
+    }
+    .ba-box.has-image{ min-height:160px; padding:10px 6px; }
+    .ba-box .ba-label{ font-size:0.58rem; line-height:1.3; }
+    .ba-box .ba-tag{ font-size:0.58rem; padding:2px 5px; margin-bottom:6px; }
+    .quote-grid{ grid-template-columns:1fr; gap:10px; }
+    .quote-card{ padding:16px; }
+    .trust-strip{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    .trust-item{ padding:15px 8px; }
+    .trust-item .big{ font-size:1.15rem; }
+    .trust-item span{ font-size:0.65rem; }
+    .area-chips{ gap:6px; }
+    .chip{ padding:7px 9px; font-size:0.68rem; }
+    .contact-block{
+      width:100%;
+      padding:24px 14px;
+      gap:18px;
+      box-shadow:6px 6px 0 var(--accent);
+    }
+    .contact-block h2{ font-size:clamp(1.75rem, 8vw, 2.3rem); }
+    .contact-grid{ grid-template-columns:1fr; gap:14px; }
+    .contact-line .value{ font-size:0.95rem; overflow-wrap:anywhere; }
+    .demo-note{ font-size:0.7rem; padding:9px 10px; }
+    .contact-form input, .contact-form textarea, .contact-form select{ font-size:0.85rem; padding:10px; }
+    .contact-form .btn{ width:100%; justify-content:center; white-space:normal; }
+    footer{ padding-block:24px 90px; font-size:0.68rem; }
     .social-btn{ width:46px; height:46px; }
-    .social-rail{ right:14px; }
+    .social-rail{ right:10px; gap:8px; }
   }
 </style>
 </head>
