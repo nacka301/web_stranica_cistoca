@@ -340,52 +340,70 @@
   .social-btn svg{ width:22px; height:22px; }
 
   @media (max-width:700px){
-    body{ padding-inline:10px; overflow-x:hidden; font-size:0.92rem; }
+    body{ padding-inline:6px; overflow-x:hidden; font-size:0.78rem; }
     .wrap{ width:100%; max-width:100%; }
-    .hero{ padding-block:42px 32px; gap:14px; }
-    .hero h1{ font-size:clamp(2rem, 10vw, 2.7rem); }
-    .hero p.lead{ font-size:0.95rem; }
-    .hero-watermark{ font-size:clamp(3.5rem, 22vw, 6rem); }
-    .badge-row, .cta-row{ width:100%; gap:8px; }
-    .badge{ font-size:0.68rem; padding:6px 8px; max-width:100%; }
-    .cta-row{ flex-direction:column; align-items:stretch; }
-    .cta-row .btn{ width:100%; justify-content:center; white-space:normal; text-align:center; }
-    section{ padding-block:36px; }
-    .section-head{ margin-bottom:20px; }
-    .section-head h2{ font-size:clamp(1.75rem, 8vw, 2.3rem); }
-    .section-head .sub{ font-size:0.88rem; }
+    .hero{ padding-block:26px 22px; gap:9px; }
+    .hero h1{ font-size:clamp(1.55rem, 8vw, 2rem); }
+    .hero p.lead{ font-size:0.78rem; line-height:1.4; max-width:42ch; }
+    .hero-watermark{ font-size:clamp(2.8rem, 18vw, 4.5rem); }
+    .badge-row, .cta-row{ width:100%; gap:5px; }
+    .badge{ font-size:0.56rem; padding:4px 6px; border-width:1px; max-width:100%; }
+    .cta-row{ flex-direction:row; align-items:stretch; }
+    .cta-row .btn{ width:50%; justify-content:center; white-space:normal; text-align:center; }
+    .btn{ border-width:2px; padding:8px 7px; font-size:0.62rem; letter-spacing:0; }
+    .btn-fill{ box-shadow:3px 3px 0 var(--line); }
+    .btn-outline{ box-shadow:3px 3px 0 var(--accent); }
+    section{ padding-block:24px; }
+    section + section{ border-top-width:2px; }
+    .section-head{ margin-bottom:13px; gap:5px; }
+    .section-head h2{ font-size:clamp(1.35rem, 7vw, 1.8rem); }
+    .section-head .sub{ font-size:0.72rem; line-height:1.4; }
+    .eyebrow{ font-size:0.58rem; letter-spacing:0.1em; }
     .svc-grid, .steps{ grid-template-columns:1fr; }
-    .svc-card, .step{ padding:18px 16px; }
+    .svc-grid, .steps{ border-width:2px; }
+    .svc-card, .step{ padding:12px 10px; border-width:2px; gap:5px; }
+    .svc-card h3, .step h3{ font-size:0.8rem; }
+    .svc-card p, .step p{ font-size:0.7rem; line-height:1.35; }
+    .svc-card .idx{ font-size:0.6rem; }
+    .step .step-num{ font-size:2rem; }
     .ba-grid{
       grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:8px;
+      gap:5px;
     }
-    .ba-box.has-image{ min-height:160px; padding:10px 6px; }
-    .ba-box .ba-label{ font-size:0.58rem; line-height:1.3; }
-    .ba-box .ba-tag{ font-size:0.58rem; padding:2px 5px; margin-bottom:6px; }
-    .quote-grid{ grid-template-columns:1fr; gap:10px; }
-    .quote-card{ padding:16px; }
+    .ba-box.has-image{ min-height:112px; padding:7px 4px; border-width:2px; }
+    .ba-box .ba-label{ font-size:0.48rem; line-height:1.2; }
+    .ba-box .ba-tag{ font-size:0.48rem; padding:2px 4px; margin-bottom:4px; }
+    .quote-grid{ grid-template-columns:1fr; gap:6px; }
+    .quote-card{ padding:10px; border-width:2px; }
+    .quote-card p{ font-size:0.68rem; margin-bottom:7px; }
+    .quote-card strong{ font-size:0.62rem; }
     .trust-strip{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
-    .trust-item{ padding:15px 8px; }
-    .trust-item .big{ font-size:1.15rem; }
-    .trust-item span{ font-size:0.65rem; }
-    .area-chips{ gap:6px; }
-    .chip{ padding:7px 9px; font-size:0.68rem; }
+    .trust-item{ padding:10px 5px; border-width:2px; }
+    .trust-item .big{ font-size:0.85rem; }
+    .trust-item span{ font-size:0.5rem; }
+    .area-chips{ gap:4px; }
+    .chip{ padding:5px 6px; border-width:1px; font-size:0.54rem; }
     .contact-block{
       width:100%;
-      padding:24px 14px;
-      gap:18px;
-      box-shadow:6px 6px 0 var(--accent);
+      padding:17px 9px;
+      gap:11px;
+      border-width:2px;
+      box-shadow:4px 4px 0 var(--accent);
     }
-    .contact-block h2{ font-size:clamp(1.75rem, 8vw, 2.3rem); }
-    .contact-grid{ grid-template-columns:1fr; gap:14px; }
-    .contact-line .value{ font-size:0.95rem; overflow-wrap:anywhere; }
-    .demo-note{ font-size:0.7rem; padding:9px 10px; }
-    .contact-form input, .contact-form textarea, .contact-form select{ font-size:0.85rem; padding:10px; }
+    .contact-block h2{ font-size:clamp(1.4rem, 7vw, 1.8rem); }
+    .contact-grid{ grid-template-columns:1fr; gap:9px; }
+    .contact-line .label{ font-size:0.55rem; }
+    .contact-line .value{ font-size:0.78rem; overflow-wrap:anywhere; }
+    .demo-note{ font-size:0.58rem; padding:6px 7px; }
+    .contact-form{ gap:7px; }
+    .contact-form label{ font-size:0.55rem; gap:3px; }
+    .contact-form input, .contact-form textarea, .contact-form select{ font-size:0.72rem; padding:7px; border-width:2px; }
+    .contact-form textarea{ min-height:68px; }
     .contact-form .btn{ width:100%; justify-content:center; white-space:normal; }
-    footer{ padding-block:24px 90px; font-size:0.68rem; }
-    .social-btn{ width:46px; height:46px; }
-    .social-rail{ right:10px; gap:8px; }
+    footer{ padding-block:18px 70px; font-size:0.56rem; }
+    .social-btn{ width:36px; height:36px; }
+    .social-btn svg{ width:16px; height:16px; }
+    .social-rail{ right:7px; gap:5px; }
   }
 </style>
 </head>
